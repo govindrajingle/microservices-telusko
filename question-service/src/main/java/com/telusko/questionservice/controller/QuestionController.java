@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.telusko.questionservice.dao.CarRepository;
 import com.telusko.questionservice.dao.QuestionDao;
+import com.telusko.questionservice.model.Car;
 import com.telusko.questionservice.model.Question;
 import com.telusko.questionservice.model.QuestionWrapper;
 import com.telusko.questionservice.model.Response;
@@ -80,6 +82,14 @@ public class QuestionController {
 	public ResponseEntity<Integer> getScore(@RequestBody List<Response> responses) {
 		return questionService.getScore(responses);
 	}
+	
+	@Autowired
+	CarRepository carRepo;
+	
+	@GetMapping("getAllCars")
+    public List<Car> getAllCars() {
+        return carRepo.findAll();
+    }
 
 	// 1. generate
 	// 2. getQuestions (questionid)

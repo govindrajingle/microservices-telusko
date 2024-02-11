@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.telusko.quizservice.dao.QuizDao;
 import com.telusko.quizservice.feign.QuizInterface;
+import com.telusko.quizservice.model.Car;
 import com.telusko.quizservice.model.QuestionWrapper;
 import com.telusko.quizservice.model.Quiz;
 
@@ -21,7 +22,7 @@ public class QuizService {
 	QuizInterface quizInterface;
 
 	public ResponseEntity<String> createQuiz(String category, Integer numQ, String title) {
-		// call the generate url from question-service via the RestTemplate(Class)
+		// call the generate url from question-service via the RestTemplate(Class) we use to call another server/ service
 		// methods (http://localhost:8081/question/generate)
 		// two problems 1) can't run on other machines with IP
 		// 2) don't want the hard coded port number
@@ -40,6 +41,10 @@ public class QuizService {
 		List<Integer> questionIds = quiz.getQuestionIds();
 		ResponseEntity<List<QuestionWrapper>> questions = quizInterface.getQuestionsFromId(questionIds);
 		return questions;
+	}
+
+	public List<Car> getCars() {
+		return quizInterface.getAllCars();
 	}
 
 }

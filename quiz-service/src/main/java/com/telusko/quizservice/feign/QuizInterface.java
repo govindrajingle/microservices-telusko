@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.telusko.quizservice.model.Car;
 import com.telusko.quizservice.model.QuestionWrapper;
 
 @FeignClient(name = "QUESTION-SERVICE")
@@ -22,7 +23,9 @@ public interface QuizInterface {
 	@PostMapping("question/getQuestions")
 	public ResponseEntity<List<QuestionWrapper>> getQuestionsFromId(@RequestBody List<Integer> questionIds);
 
-	@PostMapping("getScore")
+	@PostMapping("question/getScore")
 	public ResponseEntity<Integer> getScore(@RequestBody List<Response> responses);
-
+	
+    @GetMapping("question/getAllCars")
+    public List<Car> getAllCars();
 }
